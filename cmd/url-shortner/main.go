@@ -28,7 +28,6 @@ func main() {
 
 	log.Info("starting url-shortener service", slog.String("env", cfg.Env))
 	log.Debug("debug messages are enabled")
-	// TODO: init storage: postgres
 	storage, err := postgresql.NewPostgresqlStorage(cfg.DatabaseUrl)
 	if err != nil {
 		log.Error("failed to init storage", sl.Err(err))
