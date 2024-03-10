@@ -52,6 +52,7 @@ func (s *PostgresqlStorage) SaveURL(urlToSave string, alias string) (int64, erro
 		}
 		return 0, fmt.Errorf("%s: %w", op, err)
 	}
+	defer s.pool.Close()
 
 	return id, err
 }
@@ -67,6 +68,7 @@ func (s *PostgresqlStorage) GetURL(Id int64) (models.URL, error) {
 		}
 		return models.URL{}, fmt.Errorf("%s: %w", op, err)
 	}
+	defer s.pool.Close()
 
 	return url, nil
 
@@ -83,6 +85,7 @@ func (s *PostgresqlStorage) GetURLByAlias(Alias string) (models.URL, error) {
 		}
 		return models.URL{}, fmt.Errorf("%s: %w", op, err)
 	}
+	defer s.pool.Close()
 
 	return url, nil
 
